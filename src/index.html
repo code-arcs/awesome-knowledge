@@ -7,31 +7,39 @@
 
     <title>#Awesome #Knowledge by CodeArcs.de</title>
 
-    <link href="vendor/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <awesome-knowledge-app>
-            Loading ...
-        </awesome-knowledge-app>
+<div class="container">
+    <awesome-knowledge-app>
+        Loading ...
+    </awesome-knowledge-app>
 
-        <footer class="text-center">
-            <hr>
-            <small>With passion by CodeArcs.de</small>
-        </footer>
-    </div>
+    <footer class="text-center">
+        <hr>
+        <small>With passion by CodeArcs.de</small>
+    </footer>
+</div>
 
-    <!-- Le JavaScript -->
-    <script src="https://code.angularjs.org/tools/system.js"></script>
-    <script src="https://code.angularjs.org/tools/typescript.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-alpha.52/angular2.dev.js"></script>
-    <script>
-        System.config({
-            transpiler: 'typescript',
-            typescriptOptions: { emitDecoratorMetadata: true }
-        });
-        System.import('app/app.ts');
-    </script>
+<!-- Le JavaScript -->
+<script src="../node_modules/systemjs/dist/system.js"></script>
+<script src="../node_modules/typescript/lib/typescript.js"></script>
+<script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
+
+<script src="../node_modules/pouchdb/dist/pouchdb.js"></script>
+<script>
+    System.config({
+        transpiler: 'typescript',
+        typescriptOptions: {emitDecoratorMetadata: true},
+        map: {
+            'es6-promise': '../node_modules/es6-promise/dist/es6-promise.js'
+        },
+        paths: {
+            'angular2/*' : '../node_modules/angular2/bundles/*.js'
+        }
+    });
+    System.import('app/app.ts');
+</script>
 </body>
 </html>

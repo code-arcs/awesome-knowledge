@@ -1,8 +1,9 @@
 //https://angular.io/docs/ts/latest/tutorial/toh-pt1.html
 import {bootstrap, Component, FORM_DIRECTIVES, NgFor} from 'angular2/angular2'
+
 import {PouchDBService} from './service/pouchDbService.ts'
-import {IStorageService} from './service/interface/storageService.ts'
-import {Item} from './model/item'
+import {IStorageService} from 'service/interface/storageService'
+import {Item} from 'model/item'
 
 @Component({
     selector: 'awesome-knowledge-app',

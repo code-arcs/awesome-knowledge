@@ -1,7 +1,10 @@
-import {IStorageService} from './interface/storageService.ts'
-import {Item} from "../model/item";
+import {IStorageService} from 'interface/storageService'
+import {Item} from 'model/item'
 
 export class PouchDBService implements IStorageService<Item> {
+
+    private db:PouchDB = new PouchDB('storage');
+
     findAll():Item[] {
         return [
             {
