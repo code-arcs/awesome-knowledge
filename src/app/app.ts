@@ -12,12 +12,12 @@ import {Item} from './model/item'
     <div>
         <div class="form-group">
             <label for="name">Name</label>
-            <input id="name" [(ng-model)]="name" placeholder="name" class="form-control">
+            <input id="name" [(ngModel)]="name" placeholder="name" class="form-control">
             <p class="help-block">{{item.name}}</p>
         </div>
         <div class="form-group">
             <label for="tags">Tags</label>
-            <input id="tags" [(ng-model)]="item.tags" placeholder="tags" class="form-control">
+            <input id="tags" [(ngModel)]="item.tags" placeholder="tags" class="form-control">
             <p class="help-block">{{item.tags}}</p>
         </div>
         <button (click)="onClick()" class="btn btn-primary">add {{ item.name }}</button>
@@ -25,8 +25,9 @@ import {Item} from './model/item'
 
     <h2>My Items</h2>
     <ul class="items">
-      <li *ng-for="#item of items">
-        <span class="badge">{{item.id}}</span> {{item.name}}
+      <li *ngFor="#item of items">
+        <span class="badge">{{item.id}}</span>
+        {{item.name}}
       </li>
     </ul>
     `,
