@@ -1,7 +1,8 @@
 //https://angular.io/docs/ts/latest/tutorial/toh-pt1.html
-
-
-import {bootstrap, Component, FORM_DIRECTIVES, NgFor} from 'angular2/angular2';
+import {bootstrap, Component, FORM_DIRECTIVES, NgFor} from 'angular2/angular2'
+import {PouchDBService} from './service/pouchDbService.ts'
+import {IStorageService} from './service/interface/storageService.ts'
+import {Item} from './model/item'
 
 @Component({
     selector: 'awesome-knowledge-app',
@@ -11,7 +12,7 @@ import {bootstrap, Component, FORM_DIRECTIVES, NgFor} from 'angular2/angular2';
     <div>
         <div class="form-group">
             <label for="name">Name</label>
-            <input id="name" [(ng-model)]="item.name" placeholder="name" class="form-control">
+            <input id="name" [(ng-model)]="name" placeholder="name" class="form-control">
             <p class="help-block">{{item.name}}</p>
         </div>
         <div class="form-group">
@@ -46,33 +47,25 @@ import {bootstrap, Component, FORM_DIRECTIVES, NgFor} from 'angular2/angular2';
   .selected { background-color: #EEE; color: #369; }
   `],
 })
-
 class AwesomeKnowledgeApp {
+    private StorageService:IStorageService;
+
     public title = 'Awesome Knowledge';
     public item:Item = {
         id: 3,
         name: 'ref...',
         tags: ['...'],
     };
-    public items = ITEMS;
+    public items:Item[];
+
+    constructor(StorageService:PouchDBService) {
+        this.StorageService = StorageService;
+        this.items = StorageService.findAll();
+    }
 
     onClick() {
         this.items.push({id: this.items.length + 1, name: this.item.name, tags: this.item.tags});
     }
 }
 
-class Item {
-    id:Number;
-    name:String;
-    tags:Array;
-}
-
-bootstrap(AwesomeKnowledgeApp);
-
-var ITEMS:Item[] = [
-    {
-        id: 1,
-        name: 'http://www.fullstackradio.com/31',
-        tags: ['architecture', 'estimate', 'design'],
-    }
-];
+bootstrap(AwesomeKnowledgeApp, [PouchDBService]);

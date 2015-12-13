@@ -17,6 +17,13 @@
     "node_modules"
   ],
   "files": [
-    "src/index.ts"
+    "app/app.ts",
+
+    // Services
+    "app/service/pouchDbService.ts",
+    "app/service/interface/storageService.ts",
+
+    // Models
+    "app/model/item.ts"
   ]
 }
