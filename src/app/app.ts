@@ -1,23 +1,25 @@
 //https://angular.io/docs/ts/latest/tutorial/toh-pt1.html
-class Item {
-    id:number;
-    name:string;
-    tags:array;
-}
+
 
 import {bootstrap, Component, FORM_DIRECTIVES, NgFor} from 'angular2/angular2';
 
 @Component({
-    selector: 'my-app',
+    selector: 'awesome-knowledge-app',
     directives: [FORM_DIRECTIVES, NgFor],
     template: `
     <h1>{{title}}</h1>
     <div>
-        <label>name: </label>{{item.name}}
-    <div><input [(ng-model)]="item.name" placeholder="name"></div>
-        <label>tags: </label>{{item.tags}}
-    <div><input [(ng-model)]="item.tags" placeholder="tags"></div>
-    <button (click)="onClick()">add {{ item.name }}</button>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" [(ng-model)]="item.name" placeholder="name" class="form-control">
+            <p class="help-block">{{item.name}}</p>
+        </div>
+        <div class="form-group">
+            <label for="tags">Tags</label>
+            <input id="tags" [(ng-model)]="item.tags" placeholder="tags" class="form-control">
+            <p class="help-block">{{item.tags}}</p>
+        </div>
+        <button (click)="onClick()" class="btn btn-primary">add {{ item.name }}</button>
     </div>
 
     <h2>My Items</h2>
@@ -28,8 +30,8 @@ import {bootstrap, Component, FORM_DIRECTIVES, NgFor} from 'angular2/angular2';
     </ul>
     `,
     styles: [`
-  .items {list-style-type: none; margin-left: 1em; padding: 0; width: 10em;}
-  .items li { cursor: pointer; position: relative; left: 0; transition: all 0.2s ease; }
+  .items {list-style-type: none; margin-left: 0; padding: 0;}
+  .items li { cursor: pointer; position: relative; left: 0; transition: all 0.2s ease; padding: 2px 3px;}
   .items li:hover {color: #369; background-color: #EEE; left: .2em;}
   .items .badge {
     font-size: small;
@@ -45,7 +47,7 @@ import {bootstrap, Component, FORM_DIRECTIVES, NgFor} from 'angular2/angular2';
   `],
 })
 
-class AppComponent {
+class AwesomeKnowledgeApp {
     public title = 'Awesome Knowledge';
     public item:Item = {
         id: 3,
@@ -59,7 +61,13 @@ class AppComponent {
     }
 }
 
-bootstrap(AppComponent);
+class Item {
+    id:Number;
+    name:String;
+    tags:Array;
+}
+
+bootstrap(AwesomeKnowledgeApp);
 
 var ITEMS:Item[] = [
     {
