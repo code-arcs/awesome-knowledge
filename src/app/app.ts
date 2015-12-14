@@ -1,35 +1,36 @@
 //https://angular.io/docs/ts/latest/tutorial/toh-pt1.html
-import {bootstrap, Component, FORM_DIRECTIVES, NgFor} from 'angular2/angular2'
+import {bootstrap, Component, FORM_DIRECTIVES, CORE_DIRECTIVES} from 'angular2/angular2'
 import {PouchDBService} from './service/pouchDbService.ts'
 import {IStorageService} from './service/interface/storageService.ts'
 import {Item} from './model/item'
 
 @Component({
     selector: 'awesome-knowledge-app',
-    directives: [FORM_DIRECTIVES, NgFor],
+    directives: [FORM_DIRECTIVES, CORE_DIRECTIVES],
     template: `
     <h1>{{title}}</h1>
     <div>
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input id="name" [(ngModel)]="name" placeholder="name" class="form-control">
-            <p class="help-block">{{item.name}}</p>
-        </div>
-        <div class="form-group">
-            <label for="tags">Tags</label>
-            <input id="tags" [(ngModel)]="item.tags" placeholder="tags" class="form-control">
-            <p class="help-block">{{item.tags}}</p>
-        </div>
-        <button (click)="onClick()" class="btn btn-primary">add {{ item.name }}</button>
+        <button (click)="onClick()" class="btn btn-primary">add</button>
     </div>
-
-    <h2>My Items</h2>
+    <!-- iterate over items -->
     <ul class="items">
-      <li *ngFor="#item of items">
+      <li *ngFor="#item of items"  [ngClass]="getSelectedClass(hero)" (click)="onSelect(item)">
         <span class="badge">{{item.id}}</span>
         {{item.name}}
       </li>
     </ul>
+    <!-- on select show item details -->
+    <div *ngIf="selectedItem">
+    <h2>{{selectedItem.name}} details!</h2>
+        <div class="form-group">
+        <label>name: </label>
+        <input id="tags" [(ngModel)]="selectedItem.name" placeholder="tags" class="form-control">
+        </div>
+        <div class="form-group">
+        <label>tags: </label>
+        <input id="tags" [(ngModel)]="selectedItem.tags" placeholder="tags" class="form-control">
+        </div>
+    </div>
     `,
     styles: [`
   .items {list-style-type: none; margin-left: 0; padding: 0;}
@@ -52,20 +53,24 @@ class AwesomeKnowledgeApp {
     private StorageService:IStorageService;
 
     public title = 'Awesome Knowledge';
-    public item:Item = {
-        id: 3,
-        name: 'ref...',
-        tags: ['...'],
-    };
     public items:Item[];
+    public selectedItem:Item = null;
 
     constructor(StorageService:PouchDBService) {
         this.StorageService = StorageService;
         this.items = StorageService.findAll();
     }
 
+    onSelect(item:Item) {
+        this.selectedItem = item;
+    }
+
     onClick() {
-        this.items.push({id: this.items.length + 1, name: this.item.name, tags: this.item.tags});
+        this.items.push({id: this.items.length + 1, name: 'New awesome item', tags: []});
+    }
+
+    getSelectedClass(item:Item) {
+        return {'selected': item === this.selectedItem};
     }
 }
 
