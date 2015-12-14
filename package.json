@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "live-server": "^0.9.0"
+  },
+  "dependencies": {
+    "pouchdb": "^5.1.0"
   }
 }

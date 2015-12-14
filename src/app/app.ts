@@ -58,7 +58,13 @@ class AwesomeKnowledgeApp {
 
     constructor(StorageService:PouchDBService) {
         this.StorageService = StorageService;
-        this.items = StorageService.findAll();
+        this.items = [];
+        StorageService.findAll()
+            .then(storedItems => {
+                storedItems.forEach(i => {
+                    this.items.push(i);
+                });
+            });
     }
 
     onSelect(item:Item) {
