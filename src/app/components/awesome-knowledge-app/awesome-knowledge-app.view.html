@@ -1,0 +1,23 @@
+<h1>{{title}}</h1>
+<div>
+    <button (click)="onClick()" class="btn btn-primary">add</button>
+</div>
+<!-- iterate over items -->
+<ul class="items">
+    <li *ngFor="#item of items"  [ngClass]="getSelectedClass(hero)" (click)="onSelect(item)">
+        <span class="badge">{{item.id}}</span>
+        {{item.name}}
+    </li>
+</ul>
+<!-- on select show item details -->
+<div *ngIf="selectedItem">
+    <h2>{{selectedItem.name}} details!</h2>
+    <div class="form-group">
+        <label>name: </label>
+        <input id="tags" [(ngModel)]="selectedItem.name" placeholder="tags" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>tags: </label>
+        <input id="tags" [(ngModel)]="selectedItem.tags" placeholder="tags" class="form-control">
+    </div>
+</div>
